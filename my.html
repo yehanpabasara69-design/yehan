@@ -1,0 +1,2504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Yehan — Full-Stack Developer</title>
+
+  <meta
+    name="description"
+    content="Yehan is a full-stack developer building modern websites, mobile apps and custom software."
+  >
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+
+    /* =====================================================
+       ROOT
+    ===================================================== */
+
+    :root {
+      --bg: #050507;
+      --bg2: #0a0a0f;
+      --card: rgba(255,255,255,.045);
+
+      --text: #ffffff;
+      --muted: #9696a4;
+
+      --border: rgba(255,255,255,.09);
+
+      --purple: #735cff;
+      --blue: #00d4ff;
+
+      --green: #38e58d;
+
+      --max: 1180px;
+    }
+
+
+    /* =====================================================
+       RESET
+    ===================================================== */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea {
+      font-family: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .container {
+      width: min(92%, var(--max));
+      margin: auto;
+    }
+
+
+    /* =====================================================
+       BACKGROUND
+    ===================================================== */
+
+    .background-glow {
+      position: fixed;
+      width: 500px;
+      height: 500px;
+
+      background: var(--purple);
+
+      filter: blur(180px);
+
+      opacity: .09;
+
+      top: -200px;
+      right: -150px;
+
+      pointer-events: none;
+
+      z-index: -1;
+    }
+
+
+    /* =====================================================
+       NAVBAR
+    ===================================================== */
+
+    header {
+      position: fixed;
+
+      top: 0;
+      left: 0;
+
+      width: 100%;
+
+      z-index: 999;
+
+      background: rgba(5,5,7,.72);
+
+      backdrop-filter: blur(18px);
+
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+
+    nav {
+      height: 76px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 800;
+
+      letter-spacing: -1px;
+    }
+
+    .logo span {
+      color: var(--purple);
+    }
+
+    .nav-links {
+      display: flex;
+
+      gap: 30px;
+
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #aaaab6;
+
+      font-size: 13px;
+
+      transition: .3s;
+    }
+
+    .nav-links a:hover {
+      color: white;
+    }
+
+    .nav-cta {
+      padding: 10px 17px;
+
+      border-radius: 9px;
+
+      background: white;
+
+      color: black;
+
+      font-size: 13px;
+
+      font-weight: 700;
+
+      transition: .3s;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+    }
+
+    .menu-btn {
+      display: none;
+
+      border: 1px solid var(--border);
+
+      background: rgba(255,255,255,.04);
+
+      color: white;
+
+      width: 42px;
+      height: 42px;
+
+      border-radius: 10px;
+
+      font-size: 20px;
+    }
+
+
+    /* =====================================================
+       MOBILE NAV
+    ===================================================== */
+
+    .mobile-menu {
+      display: none;
+
+      position: fixed;
+
+      top: 76px;
+      left: 0;
+
+      width: 100%;
+
+      background: rgba(8,8,11,.97);
+
+      backdrop-filter: blur(20px);
+
+      border-bottom: 1px solid var(--border);
+
+      padding: 20px;
+    }
+
+    .mobile-menu.active {
+      display: block;
+    }
+
+    .mobile-menu a {
+      display: block;
+
+      padding: 15px 5px;
+
+      color: #bbb;
+
+      border-bottom: 1px solid rgba(255,255,255,.05);
+    }
+
+
+    /* =====================================================
+       HERO
+    ===================================================== */
+
+    .hero {
+      min-height: 100vh;
+
+      display: flex;
+      align-items: center;
+
+      padding-top: 80px;
+
+      position: relative;
+    }
+
+    .hero-grid {
+      display: grid;
+
+      grid-template-columns: 1.2fr .8fr;
+
+      align-items: center;
+
+      gap: 70px;
+    }
+
+    .availability {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 9px;
+
+      padding: 8px 13px;
+
+      border: 1px solid var(--border);
+
+      border-radius: 50px;
+
+      background: rgba(255,255,255,.03);
+
+      color: #c5c5cf;
+
+      font-size: 12px;
+
+      margin-bottom: 25px;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+
+      border-radius: 50%;
+
+      background: var(--green);
+
+      box-shadow: 0 0 14px var(--green);
+    }
+
+    .hero h1 {
+      font-size: clamp(52px, 7vw, 88px);
+
+      line-height: .98;
+
+      letter-spacing: -5px;
+
+      margin-bottom: 25px;
+    }
+
+    .gradient {
+      background: linear-gradient(
+        90deg,
+        #fff,
+        #9e91ff,
+        #00d4ff
+      );
+
+      -webkit-background-clip: text;
+
+      background-clip: text;
+
+      color: transparent;
+    }
+
+    .hero-description {
+      max-width: 650px;
+
+      color: var(--muted);
+
+      font-size: 17px;
+
+      margin-bottom: 32px;
+    }
+
+    .hero-buttons {
+      display: flex;
+
+      gap: 12px;
+
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+
+      align-items: center;
+      justify-content: center;
+
+      padding: 14px 21px;
+
+      border-radius: 11px;
+
+      font-size: 13px;
+
+      font-weight: 700;
+
+      transition: .3s;
+    }
+
+    .btn-primary {
+      background: white;
+      color: black;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+
+      box-shadow:
+        0 15px 40px rgba(255,255,255,.1);
+    }
+
+    .btn-secondary {
+      border: 1px solid var(--border);
+
+      background: rgba(255,255,255,.03);
+
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,.08);
+
+      transform: translateY(-3px);
+    }
+
+
+    /* =====================================================
+       HERO CARD
+    ===================================================== */
+
+    .hero-card {
+      position: relative;
+
+      height: 390px;
+
+      border: 1px solid var(--border);
+
+      border-radius: 25px;
+
+      background:
+        radial-gradient(
+          circle at 30% 25%,
+          rgba(115,92,255,.25),
+          transparent 40%
+        ),
+        radial-gradient(
+          circle at 80% 75%,
+          rgba(0,212,255,.15),
+          transparent 40%
+        ),
+        #0b0b10;
+
+      overflow: hidden;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-card::before {
+      content: "";
+
+      position: absolute;
+
+      width: 180px;
+      height: 180px;
+
+      border: 1px solid rgba(255,255,255,.08);
+
+      border-radius: 50%;
+    }
+
+    .hero-card::after {
+      content: "";
+
+      position: absolute;
+
+      width: 280px;
+      height: 280px;
+
+      border: 1px solid rgba(255,255,255,.05);
+
+      border-radius: 50%;
+    }
+
+    .hero-card-content {
+      position: relative;
+
+      z-index: 2;
+
+      text-align: center;
+    }
+
+    .hero-initial {
+      width: 95px;
+      height: 95px;
+
+      margin: auto auto 18px;
+
+      border-radius: 25px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      font-size: 42px;
+
+      font-weight: 800;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--purple),
+          var(--blue)
+        );
+
+      box-shadow:
+        0 20px 70px rgba(115,92,255,.3);
+    }
+
+    .hero-card h3 {
+      font-size: 23px;
+    }
+
+    .hero-card p {
+      color: var(--muted);
+
+      font-size: 13px;
+    }
+
+
+    /* =====================================================
+       STATS
+    ===================================================== */
+
+    .stats {
+      border-top: 1px solid var(--border);
+
+      border-bottom: 1px solid var(--border);
+
+      padding: 35px 0;
+    }
+
+    .stats-grid {
+      display: grid;
+
+      grid-template-columns: repeat(3,1fr);
+
+      text-align: center;
+    }
+
+    .stat h3 {
+      font-size: 30px;
+    }
+
+    .stat p {
+      color: var(--muted);
+
+      font-size: 12px;
+    }
+
+
+    /* =====================================================
+       GENERAL SECTION
+    ===================================================== */
+
+    section {
+      padding: 115px 0;
+    }
+
+    .section-top {
+      margin-bottom: 55px;
+    }
+
+    .label {
+      color: var(--blue);
+
+      font-size: 11px;
+
+      font-weight: 700;
+
+      letter-spacing: 2px;
+
+      text-transform: uppercase;
+
+      margin-bottom: 13px;
+    }
+
+    .section-top h2 {
+      font-size: clamp(36px,5vw,57px);
+
+      line-height: 1;
+
+      letter-spacing: -3px;
+
+      max-width: 700px;
+    }
+
+    .section-top p {
+      color: var(--muted);
+
+      max-width: 620px;
+
+      margin-top: 15px;
+
+      font-size: 14px;
+    }
+
+
+    /* =====================================================
+       SERVICES
+    ===================================================== */
+
+    .services {
+      display: grid;
+
+      grid-template-columns: repeat(2,1fr);
+
+      gap: 15px;
+    }
+
+    .service {
+      padding: 30px;
+
+      border: 1px solid var(--border);
+
+      border-radius: 18px;
+
+      background: var(--card);
+
+      transition: .35s;
+    }
+
+    .service:hover {
+      transform: translateY(-5px);
+
+      border-color: rgba(115,92,255,.5);
+
+      background: rgba(115,92,255,.05);
+    }
+
+    .service-number {
+      color: var(--purple);
+
+      font-size: 12px;
+
+      font-weight: 700;
+
+      margin-bottom: 28px;
+    }
+
+    .service-icon {
+      font-size: 28px;
+
+      margin-bottom: 17px;
+    }
+
+    .service h3 {
+      font-size: 20px;
+
+      margin-bottom: 9px;
+    }
+
+    .service p {
+      color: var(--muted);
+
+      font-size: 13px;
+    }
+
+
+    /* =====================================================
+       PROJECTS
+    ===================================================== */
+
+    .projects {
+      display: grid;
+
+      grid-template-columns: repeat(2,1fr);
+
+      gap: 20px;
+    }
+
+    .project {
+      overflow: hidden;
+
+      border: 1px solid var(--border);
+
+      border-radius: 20px;
+
+      background: var(--card);
+
+      transition: .35s;
+    }
+
+    .project:hover {
+      transform: translateY(-6px);
+
+      border-color: rgba(255,255,255,.18);
+    }
+
+    .project-image {
+      height: 270px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      position: relative;
+
+      overflow: hidden;
+    }
+
+    .project-image.restaurant {
+      background:
+        radial-gradient(
+          circle at 20% 20%,
+          rgba(255,100,80,.35),
+          transparent 40%
+        ),
+        #111014;
+    }
+
+    .project-image.hotel {
+      background:
+        radial-gradient(
+          circle at 70% 30%,
+          rgba(0,212,255,.3),
+          transparent 40%
+        ),
+        #0c1115;
+    }
+
+    .project-image.salon {
+      background:
+        radial-gradient(
+          circle at 30% 70%,
+          rgba(230,120,190,.3),
+          transparent 40%
+        ),
+        #120d12;
+    }
+
+    .project-image.rental {
+      background:
+        radial-gradient(
+          circle at 70% 70%,
+          rgba(115,92,255,.35),
+          transparent 40%
+        ),
+        #0c0c14;
+    }
+
+    .mockup {
+      width: 75%;
+
+      height: 65%;
+
+      border-radius: 12px;
+
+      border: 1px solid rgba(255,255,255,.12);
+
+      background: rgba(0,0,0,.38);
+
+      backdrop-filter: blur(12px);
+
+      padding: 15px;
+
+      box-shadow: 0 25px 70px rgba(0,0,0,.4);
+    }
+
+    .mockup-top {
+      display: flex;
+
+      gap: 5px;
+
+      margin-bottom: 15px;
+    }
+
+    .mockup-dot {
+      width: 6px;
+      height: 6px;
+
+      border-radius: 50%;
+
+      background: rgba(255,255,255,.35);
+    }
+
+    .mockup-line {
+      height: 8px;
+
+      background: rgba(255,255,255,.1);
+
+      border-radius: 20px;
+
+      margin-bottom: 9px;
+    }
+
+    .mockup-line.short {
+      width: 45%;
+    }
+
+    .mockup-line.medium {
+      width: 70%;
+    }
+
+    .project-content {
+      padding: 25px;
+    }
+
+    .project-category {
+      color: var(--blue);
+
+      font-size: 10px;
+
+      text-transform: uppercase;
+
+      letter-spacing: 1.5px;
+
+      font-weight: 700;
+    }
+
+    .project h3 {
+      font-size: 22px;
+
+      margin: 8px 0;
+    }
+
+    .project p {
+      color: var(--muted);
+
+      font-size: 13px;
+
+      margin-bottom: 18px;
+    }
+
+    .project-buttons {
+      display: flex;
+
+      gap: 9px;
+    }
+
+    .small-btn {
+      padding: 9px 13px;
+
+      border-radius: 8px;
+
+      border: 1px solid var(--border);
+
+      background: rgba(255,255,255,.04);
+
+      color: white;
+
+      font-size: 11px;
+
+      font-weight: 700;
+
+      transition: .3s;
+    }
+
+    .small-btn:hover {
+      background: white;
+
+      color: black;
+    }
+
+
+    /* =====================================================
+       TECH STACK
+    ===================================================== */
+
+    .tech-grid {
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 10px;
+    }
+
+    .tech {
+      padding: 12px 17px;
+
+      border: 1px solid var(--border);
+
+      border-radius: 10px;
+
+      background: var(--card);
+
+      color: #c8c8d1;
+
+      font-size: 12px;
+
+      transition: .3s;
+    }
+
+    .tech:hover {
+      color: white;
+
+      border-color: rgba(115,92,255,.5);
+
+      transform: translateY(-2px);
+    }
+
+
+    /* =====================================================
+       PROCESS
+    ===================================================== */
+
+    .process {
+      display: grid;
+
+      grid-template-columns: repeat(4,1fr);
+
+      gap: 15px;
+    }
+
+    .step {
+      padding: 25px;
+
+      border-left: 1px solid var(--border);
+    }
+
+    .step-number {
+      color: var(--purple);
+
+      font-size: 11px;
+
+      font-weight: 700;
+
+      margin-bottom: 20px;
+    }
+
+    .step h3 {
+      margin-bottom: 8px;
+
+      font-size: 17px;
+    }
+
+    .step p {
+      color: var(--muted);
+
+      font-size: 12px;
+    }
+
+
+    /* =====================================================
+       ABOUT
+    ===================================================== */
+
+    .about-grid {
+      display: grid;
+
+      grid-template-columns: .7fr 1.3fr;
+
+      gap: 70px;
+
+      align-items: start;
+    }
+
+    .about-title {
+      font-size: 45px;
+
+      line-height: 1;
+
+      letter-spacing: -2px;
+    }
+
+    .about-text p {
+      color: var(--muted);
+
+      font-size: 14px;
+
+      margin-bottom: 15px;
+    }
+
+
+    /* =====================================================
+       CONTACT
+    ===================================================== */
+
+    .contact-box {
+      padding: 65px 30px;
+
+      text-align: center;
+
+      border: 1px solid var(--border);
+
+      border-radius: 25px;
+
+      background:
+        radial-gradient(
+          circle at 50% 0%,
+          rgba(115,92,255,.15),
+          transparent 45%
+        ),
+        var(--card);
+    }
+
+    .contact-box h2 {
+      font-size: clamp(42px,7vw,72px);
+
+      line-height: 1;
+
+      letter-spacing: -4px;
+
+      margin-bottom: 18px;
+    }
+
+    .contact-box p {
+      color: var(--muted);
+
+      max-width: 570px;
+
+      margin: 0 auto 28px;
+
+      font-size: 14px;
+    }
+
+
+    /* =====================================================
+       FOOTER
+    ===================================================== */
+
+    footer {
+      padding: 30px 0;
+
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-inner {
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+    }
+
+    footer p {
+      color: #70707c;
+
+      font-size: 11px;
+    }
+
+    .socials {
+      display: flex;
+
+      gap: 18px;
+    }
+
+    .socials a {
+      color: #8a8a96;
+
+      font-size: 12px;
+
+      transition: .3s;
+    }
+
+    .socials a:hover {
+      color: white;
+    }
+
+
+    /* =====================================================
+       MODAL
+    ===================================================== */
+
+    .modal {
+      position: fixed;
+
+      inset: 0;
+
+      background: rgba(0,0,0,.78);
+
+      backdrop-filter: blur(10px);
+
+      z-index: 2000;
+
+      display: none;
+
+      align-items: center;
+
+      justify-content: center;
+
+      padding: 20px;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      width: min(700px,100%);
+
+      max-height: 90vh;
+
+      overflow-y: auto;
+
+      border: 1px solid var(--border);
+
+      border-radius: 20px;
+
+      background: #0b0b10;
+
+      padding: 30px;
+
+      position: relative;
+    }
+
+    .close-modal {
+      position: absolute;
+
+      right: 20px;
+
+      top: 20px;
+
+      width: 35px;
+      height: 35px;
+
+      border-radius: 50%;
+
+      border: 1px solid var(--border);
+
+      background: rgba(255,255,255,.05);
+
+      color: white;
+
+      font-size: 18px;
+    }
+
+    .modal-label {
+      color: var(--blue);
+
+      font-size: 10px;
+
+      font-weight: 700;
+
+      letter-spacing: 1.5px;
+
+      text-transform: uppercase;
+
+      margin-bottom: 8px;
+    }
+
+    .modal h2 {
+      font-size: 30px;
+
+      margin-bottom: 12px;
+    }
+
+    .modal p {
+      color: var(--muted);
+
+      font-size: 13px;
+
+      margin-bottom: 20px;
+    }
+
+    .features {
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 8px;
+
+      margin-bottom: 25px;
+    }
+
+    .feature {
+      padding: 8px 11px;
+
+      border-radius: 7px;
+
+      background: rgba(255,255,255,.05);
+
+      border: 1px solid var(--border);
+
+      color: #bbb;
+
+      font-size: 11px;
+    }
+
+
+    /* =====================================================
+       SCROLL REVEAL
+    ===================================================== */
+
+    .reveal {
+      opacity: 0;
+
+      transform: translateY(25px);
+
+      transition: .7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+
+      transform: translateY(0);
+    }
+
+
+    /* =====================================================
+       RESPONSIVE
+    ===================================================== */
+
+    @media(max-width:900px) {
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card {
+        display: none;
+      }
+
+      .services,
+      .projects {
+        grid-template-columns: 1fr;
+      }
+
+      .process {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+    }
+
+
+    @media(max-width:700px) {
+
+      .nav-links,
+      .nav-cta {
+        display: none;
+      }
+
+      .menu-btn {
+        display: block;
+      }
+
+      .hero h1 {
+        letter-spacing: -3px;
+      }
+
+      .hero-description {
+        font-size: 15px;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+
+      section {
+        padding: 85px 0;
+      }
+
+      .process {
+        grid-template-columns: 1fr;
+      }
+
+      .about-title {
+        font-size: 38px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+
+        gap: 15px;
+
+        text-align: center;
+      }
+    }
+
+
+    @media(max-width:450px) {
+
+      .hero-buttons {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .project-image {
+        height: 220px;
+      }
+
+      .contact-box {
+        padding: 50px 20px;
+      }
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+  <div class="background-glow"></div>
+
+
+  <!-- =====================================================
+       NAVIGATION
+  ====================================================== -->
+
+  <header>
+
+    <div class="container">
+
+      <nav>
+
+        <a href="#home" class="logo">
+          YE<span>H</span>AN
+        </a>
+
+        <ul class="nav-links">
+
+          <li>
+            <a href="#home">Home</a>
+          </li>
+
+          <li>
+            <a href="#work">Work</a>
+          </li>
+
+          <li>
+            <a href="#services">Services</a>
+          </li>
+
+          <li>
+            <a href="#about">About</a>
+          </li>
+
+          <li>
+            <a href="#contact">Contact</a>
+          </li>
+
+        </ul>
+
+        <a href="#contact" class="nav-cta">
+          Start a Project
+        </a>
+
+        <button class="menu-btn" id="menuBtn">
+          ☰
+        </button>
+
+      </nav>
+
+    </div>
+
+  </header>
+
+
+  <!-- MOBILE MENU -->
+
+  <div class="mobile-menu" id="mobileMenu">
+
+    <a href="#home">Home</a>
+    <a href="#work">Work</a>
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+
+  </div>
+
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+
+  <main>
+
+    <section class="hero" id="home">
+
+      <div class="container">
+
+        <div class="hero-grid">
+
+          <div class="hero-content reveal">
+
+            <div class="availability">
+
+              <span class="status-dot"></span>
+
+              Available for new projects
+
+            </div>
+
+
+            <h1>
+
+              I build
+
+              <span class="gradient">
+                digital products.
+              </span>
+
+            </h1>
+
+
+            <p class="hero-description">
+
+              I'm Yehan, a full-stack developer building
+              modern websites, mobile apps and custom
+              software for businesses and individuals.
+
+            </p>
+
+
+            <div class="hero-buttons">
+
+              <a
+                href="#work"
+                class="btn btn-primary"
+              >
+                View My Work →
+              </a>
+
+
+              <a
+                href="#contact"
+                class="btn btn-secondary"
+              >
+                Start a Project
+              </a>
+
+            </div>
+
+          </div>
+
+
+          <div class="hero-card reveal">
+
+            <div class="hero-card-content">
+
+              <div class="hero-initial">
+                Y
+              </div>
+
+              <h3>
+                Yehan
+              </h3>
+
+              <p>
+                Full-Stack Developer
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         STATS
+    ====================================================== -->
+
+    <div class="stats">
+
+      <div class="container">
+
+        <div class="stats-grid">
+
+          <div class="stat">
+            <h3>5+</h3>
+            <p>Projects Built</p>
+          </div>
+
+          <div class="stat">
+            <h3>10+</h3>
+            <p>Technologies</p>
+          </div>
+
+          <div class="stat">
+            <h3>100%</h3>
+            <p>Focus on Quality</p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         SERVICES
+    ====================================================== -->
+
+    <section id="services">
+
+      <div class="container">
+
+        <div class="section-top reveal">
+
+          <div class="label">
+            What I Build
+          </div>
+
+          <h2>
+            Software designed for real-world problems.
+          </h2>
+
+          <p>
+            From websites to complete business systems,
+            I turn ideas into functional digital products.
+          </p>
+
+        </div>
+
+
+        <div class="services">
+
+
+          <div class="service reveal">
+
+            <div class="service-number">
+              01
+            </div>
+
+            <div class="service-icon">
+              🌐
+            </div>
+
+            <h3>
+              Websites
+            </h3>
+
+            <p>
+              Modern, responsive websites for businesses,
+              brands and personal projects.
+            </p>
+
+          </div>
+
+
+          <div class="service reveal">
+
+            <div class="service-number">
+              02
+            </div>
+
+            <div class="service-icon">
+              📱
+            </div>
+
+            <h3>
+              Mobile Apps
+            </h3>
+
+            <p>
+              Custom mobile applications with clean
+              interfaces and powerful functionality.
+            </p>
+
+          </div>
+
+
+          <div class="service reveal">
+
+            <div class="service-number">
+              03
+            </div>
+
+            <div class="service-icon">
+              ⚙️
+            </div>
+
+            <h3>
+              Custom Software
+            </h3>
+
+            <p>
+              Business tools, dashboards, management
+              systems and custom automation.
+            </p>
+
+          </div>
+
+
+          <div class="service reveal">
+
+            <div class="service-number">
+              04
+            </div>
+
+            <div class="service-icon">
+              🛒
+            </div>
+
+            <h3>
+              E-Commerce
+            </h3>
+
+            <p>
+              Online stores with products, orders,
+              payments and administration.
+            </p>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         PROJECTS
+    ====================================================== -->
+
+    <section id="work">
+
+      <div class="container">
+
+        <div class="section-top reveal">
+
+          <div class="label">
+            Selected Work
+          </div>
+
+          <h2>
+            Projects built to solve problems.
+          </h2>
+
+          <p>
+            Explore some of the systems and digital
+            products in my portfolio.
+          </p>
+
+        </div>
+
+
+        <div class="projects">
+
+
+          <!-- RESTAURANT -->
+
+          <article class="project reveal">
+
+            <div class="project-image restaurant">
+
+              <div class="mockup">
+
+                <div class="mockup-top">
+
+                  <span class="mockup-dot"></span>
+                  <span class="mockup-dot"></span>
+                  <span class="mockup-dot"></span>
+
+                </div>
+
+                <div class="mockup-line medium"></div>
+                <div class="mockup-line"></div>
+                <div class="mockup-line short"></div>
+
+              </div>
+
+            </div>
+
+
+            <div class="project-content">
+
+              <div class="project-category">
+                Web Application
+              </div>
+
+              <h3>
+                Restaurant Ordering System
+              </h3>
+
+              <p>
+                Online ordering platform with menu,
+                cart, checkout and administration.
+              </p>
+
+              <div class="project-buttons">
+
+                <button
+                  class="small-btn"
+                  onclick="openProject('restaurant')"
+                >
+                  View Details
+                </button>
+
+                <a
+                  href="#"
+                  class="small-btn"
+                >
+                  Live Demo
+                </a>
+
+              </div>
+
+            </div>
+
+          </article>
+
+
+          <!-- HOTEL -->
+
+          <article class="project reveal">
+
+            <div class="project-image hotel">
+
+              <div class="mockup">
+
+                <div class="mockup-top">
+
+                  <span class="mockup-dot"></span>
+                  <span class="mockup-dot"></span>
+                  <span class="mockup-dot"></span>
+
+                </div>
+
+                <div class="mockup-line medium"></div>
+                <div class="mockup-line"></div>
+                <div class="mockup-line short"></div>
+
+              </div>
+
+            </div>
+
+
+            <div class="project-content">
+
+              <div class="project-category">
+                Booking Platform
+              </div>
+
+              <h3>
+                Hotel Booking System
+              </h3>
+
+              <p>
+                Room discovery, availability, booking
+                and management platform.
+              </p>
+
+              <div class="project-buttons">
+
+                <button
+                  class="small-btn"
+                  onclick="openProject('hotel')"
+                >
+                  View Details
+                </button>
+
+                <a
+                  href="#"
+                  class="small-btn"
+                >
+                  Live Demo
+                </a>
+
+              </div>
+
+            </div>
+
+          </article>
+
+
+          <!-- SALON -->
+
+          <article class="project reveal">
+
+            <div class="project-image salon">
+
+              <div class="mockup">
+
+                <div class="mockup-top">
+
+                  <span class="mockup-dot"></span>
+                  <span class="mockup-dot"></span>
+                  <span class="mockup-dot"></span>
+
+                </div>
+
+                <div class="mockup-line medium"></div>
+                <div class="mockup-line"></div>
+                <div class="mockup-line short"></div>
+
+              </div>
+
+            </div>
+
+
+            <div class="project-content">
+
+              <div class="project-category">
+                Management System
+              </div>
+
+              <h3>
+                Salon Booking System
+              </h3>
+
+              <p>
+                Appointment booking, staff,
+                customers and administration.
+              </p>
+
+              <div class="project-buttons">
+
+                <button
+                  class="small-btn"
+                  onclick="openProject('salon')"
+                >
+                  View Details
+                </button>
+
+                <a
+                  href="#"
+                  class="small-btn"
+                >
+                  Live Demo
+                </a>
+
+              </div>
+
+            </div>
+
+          </article>
+
+
+          <!-- CAR RENTAL -->
+
+          <article class="project reveal">
+
+            <div class="project-image rental">
+
+              <div class="mockup">
+
+                <div class="mockup-top">
+
+                  <span class="mockup-dot"></span>
+                  <span class="mockup-dot"></span>
+                  <span class="mockup-dot"></span>
+
+                </div>
+
+                <div class="mockup-line medium"></div>
+                <div class="mockup-line"></div>
+                <div class="mockup-line short"></div>
+
+              </div>
+
+            </div>
+
+
+            <div class="project-content">
+
+              <div class="project-category">
+                Rental Platform
+              </div>
+
+              <h3>
+                Car Rental Platform
+              </h3>
+
+              <p>
+                Vehicle listings, search, booking
+                and customer management.
+              </p>
+
+              <div class="project-buttons">
+
+                <button
+                  class="small-btn"
+                  onclick="openProject('rental')"
+                >
+                  View Details
+                </button>
+
+                <a
+                  href="#"
+                  class="small-btn"
+                >
+                  Live Demo
+                </a>
+
+              </div>
+
+            </div>
+
+          </article>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         TECH STACK
+    ====================================================== -->
+
+    <section>
+
+      <div class="container">
+
+        <div class="section-top reveal">
+
+          <div class="label">
+            Tech Stack
+          </div>
+
+          <h2>
+            Tools I work with.
+          </h2>
+
+        </div>
+
+
+        <div class="tech-grid reveal">
+
+          <div class="tech">HTML</div>
+          <div class="tech">CSS</div>
+          <div class="tech">JavaScript</div>
+          <div class="tech">TypeScript</div>
+          <div class="tech">React</div>
+          <div class="tech">Next.js</div>
+          <div class="tech">Node.js</div>
+          <div class="tech">Python</div>
+          <div class="tech">Java</div>
+          <div class="tech">C#</div>
+          <div class="tech">SQL</div>
+          <div class="tech">Git</div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         PROCESS
+    ====================================================== -->
+
+    <section>
+
+      <div class="container">
+
+        <div class="section-top reveal">
+
+          <div class="label">
+            My Process
+          </div>
+
+          <h2>
+            From idea to launch.
+          </h2>
+
+        </div>
+
+
+        <div class="process">
+
+
+          <div class="step reveal">
+
+            <div class="step-number">
+              01
+            </div>
+
+            <h3>
+              Discover
+            </h3>
+
+            <p>
+              Understand your goals, requirements
+              and business problem.
+            </p>
+
+          </div>
+
+
+          <div class="step reveal">
+
+            <div class="step-number">
+              02
+            </div>
+
+            <h3>
+              Design
+            </h3>
+
+            <p>
+              Create a clean and intuitive
+              user experience.
+            </p>
+
+          </div>
+
+
+          <div class="step reveal">
+
+            <div class="step-number">
+              03
+            </div>
+
+            <h3>
+              Build
+            </h3>
+
+            <p>
+              Develop, test and refine
+              the complete product.
+            </p>
+
+          </div>
+
+
+          <div class="step reveal">
+
+            <div class="step-number">
+              04
+            </div>
+
+            <h3>
+              Launch
+            </h3>
+
+            <p>
+              Deploy the final product and
+              provide the necessary handover.
+            </p>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         ABOUT
+    ====================================================== -->
+
+    <section id="about">
+
+      <div class="container">
+
+        <div class="about-grid">
+
+          <div class="reveal">
+
+            <div class="label">
+              About Me
+            </div>
+
+            <h2 class="about-title">
+              A developer who builds.
+            </h2>
+
+          </div>
+
+
+          <div class="about-text reveal">
+
+            <p>
+              Hi, I'm Yehan. I'm a full-stack developer
+              who enjoys turning ideas into useful
+              digital products.
+            </p>
+
+            <p>
+              I build websites, mobile applications and
+              custom software for businesses and individuals.
+            </p>
+
+            <p>
+              My goal is simple: understand the problem,
+              build the right solution and make the final
+              product easy to use.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         CONTACT
+    ====================================================== -->
+
+    <section id="contact">
+
+      <div class="container">
+
+        <div class="contact-box reveal">
+
+          <div class="label">
+            Have an idea?
+          </div>
+
+          <h2>
+            Let's build it.
+          </h2>
+
+          <p>
+            Tell me what you're trying to build.
+            Whether it's a website, mobile app or
+            custom software, let's discuss your idea.
+          </p>
+
+          <a
+            href="mailto:YOUR_EMAIL@example.com?subject=Project%20Inquiry"
+            class="btn btn-primary"
+          >
+            Start a Project →
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+
+  <footer>
+
+    <div class="container">
+
+      <div class="footer-inner">
+
+        <p>
+          © 2026 Yehan. All rights reserved.
+        </p>
+
+
+        <div class="socials">
+
+          <a
+            href="#"
+            target="_blank"
+          >
+            GitHub
+          </a>
+
+          <a
+            href="#"
+            target="_blank"
+          >
+            LinkedIn
+          </a>
+
+          <a
+            href="#"
+            target="_blank"
+          >
+            Instagram
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =====================================================
+       PROJECT MODAL
+  ====================================================== -->
+
+  <div
+    class="modal"
+    id="projectModal"
+  >
+
+    <div class="modal-content">
+
+      <button
+        class="close-modal"
+        onclick="closeProject()"
+      >
+        ×
+      </button>
+
+
+      <div
+        class="modal-label"
+        id="modalCategory"
+      >
+        Project
+      </div>
+
+
+      <h2 id="modalTitle">
+        Project Title
+      </h2>
+
+
+      <p id="modalDescription">
+        Project description.
+      </p>
+
+
+      <div
+        class="features"
+        id="modalFeatures"
+      >
+      </div>
+
+
+      <a
+        href="#"
+        class="btn btn-primary"
+      >
+        Request Similar Project →
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       JAVASCRIPT
+  ====================================================== -->
+
+  <script>
+
+    /* =====================================================
+       MOBILE MENU
+    ===================================================== */
+
+    const menuBtn =
+      document.getElementById("menuBtn");
+
+    const mobileMenu =
+      document.getElementById("mobileMenu");
+
+
+    menuBtn.addEventListener("click", () => {
+
+      mobileMenu.classList.toggle("active");
+
+    });
+
+
+    document
+      .querySelectorAll(".mobile-menu a")
+      .forEach(link => {
+
+        link.addEventListener("click", () => {
+
+          mobileMenu.classList.remove("active");
+
+        });
+
+      });
+
+
+    /* =====================================================
+       PROJECT DATA
+    ====================================================== */
+
+    const projects = {
+
+      restaurant: {
+
+        category: "Web Application",
+
+        title: "Restaurant Ordering System",
+
+        description:
+          "A complete restaurant ordering platform designed to help customers browse menus, place orders and allow staff to manage incoming orders.",
+
+        features: [
+          "Online Menu",
+          "Shopping Cart",
+          "Checkout",
+          "Order Management",
+          "Admin Dashboard",
+          "Customer Management"
+        ]
+
+      },
+
+
+      hotel: {
+
+        category: "Booking Platform",
+
+        title: "Hotel Booking System",
+
+        description:
+          "A hotel booking platform that allows customers to explore rooms, check availability and submit bookings while hotel staff manage reservations.",
+
+        features: [
+          "Room Listings",
+          "Availability",
+          "Online Booking",
+          "Reservation Management",
+          "Customer Management",
+          "Admin Dashboard"
+        ]
+
+      },
+
+
+      salon: {
+
+        category: "Management System",
+
+        title: "Salon Booking System",
+
+        description:
+          "A modern appointment management system for salons and barbers that simplifies customer bookings and staff scheduling.",
+
+        features: [
+          "Appointment Booking",
+          "Staff Management",
+          "Services",
+          "Customer Records",
+          "Schedule Management",
+          "Admin Dashboard"
+        ]
+
+      },
+
+
+      rental: {
+
+        category: "Rental Platform",
+
+        title: "Car Rental Platform",
+
+        description:
+          "A vehicle rental platform where customers can discover vehicles, check details and request bookings while administrators manage the fleet.",
+
+        features: [
+          "Vehicle Listings",
+          "Search",
+          "Filters",
+          "Booking",
+          "Customer Dashboard",
+          "Fleet Management"
+        ]
+
+      }
+
+    };
+
+
+    /* =====================================================
+       OPEN PROJECT
+    ====================================================== */
+
+    function openProject(id) {
+
+      const project = projects[id];
+
+      document.getElementById(
+        "modalCategory"
+      ).textContent = project.category;
+
+
+      document.getElementById(
+        "modalTitle"
+      ).textContent = project.title;
+
+
+      document.getElementById(
+        "modalDescription"
+      ).textContent = project.description;
+
+
+      const featureContainer =
+        document.getElementById("modalFeatures");
+
+
+      featureContainer.innerHTML = "";
+
+
+      project.features.forEach(feature => {
+
+        const element =
+          document.createElement("span");
+
+        element.className = "feature";
+
+        element.textContent = feature;
+
+        featureContainer.appendChild(element);
+
+      });
+
+
+      document
+        .getElementById("projectModal")
+        .classList.add("active");
+
+
+      document.body.classList.add("modal-open");
+
+    }
+
+
+    /* =====================================================
+       CLOSE PROJECT
+    ====================================================== */
+
+    function closeProject() {
+
+      document
+        .getElementById("projectModal")
+        .classList.remove("active");
+
+
+      document.body.classList.remove("modal-open");
+
+    }
+
+
+    /* CLOSE MODAL WHEN CLICKING OUTSIDE */
+
+    document
+      .getElementById("projectModal")
+      .addEventListener("click", (event) => {
+
+        if (
+          event.target.id === "projectModal"
+        ) {
+
+          closeProject();
+
+        }
+
+      });
+
+
+    /* ESCAPE KEY */
+
+    document.addEventListener(
+      "keydown",
+      (event) => {
+
+        if (event.key === "Escape") {
+
+          closeProject();
+
+        }
+
+      }
+    );
+
+
+    /* =====================================================
+       SCROLL REVEAL
+    ====================================================== */
+
+    const revealElements =
+      document.querySelectorAll(".reveal");
+
+
+    const observer =
+      new IntersectionObserver(
+
+        (entries) => {
+
+          entries.forEach(entry => {
+
+            if (
+              entry.isIntersecting
+            ) {
+
+              entry.target.classList.add(
+                "visible"
+              );
+
+              observer.unobserve(
+                entry.target
+              );
+
+            }
+
+          });
+
+        },
+
+        {
+          threshold: .12
+        }
+
+      );
+
+
+    revealElements.forEach(element => {
+
+      observer.observe(element);
+
+    });
+
+
+  </script>
+
+</body>
+</html>
